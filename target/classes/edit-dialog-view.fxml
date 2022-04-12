@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oraclehibernate.Controllers.EditDialogController">
+   <center>
+      <TabPane tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="User">
+               <content>
+                  <VBox>
+                     <children>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label text="Password">
+                                 <padding>
+                                    <Insets top="2.0" />
+                                 </padding>
+                              </Label>
+                              <TextField>
+                                 <HBox.margin>
+                                    <Insets left="46.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="7.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
+                           <children>
+                              <Label text="Confirm Password">
+                                 <padding>
+                                    <Insets top="2.0" />
+                                 </padding>
+                              </Label>
+                              <TextField />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="7.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content></Tab>
+          <Tab text="Granted Roles">
+               <content>
+                  <TableView prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="391.999945068359" text="Role" />
+                      <TableColumn prefWidth="108.800048828125" text="Grant" />
+                    </columns>
+                  </TableView>
+               </content>
+            </Tab>
+            <Tab text="System Privileges">
+               <content>
+                  <TableView prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="379.19995727539026" text="Privileges" />
+                      <TableColumn minWidth="0.0" prefWidth="121.60003662109375" text="Grant" />
+                    </columns>
+                  </TableView>
+               </content>
+            </Tab>
+            <Tab text="Object Privileges">
+               <content>
+                  <TableView prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="287.2000183105465" text="Privileges" />
+                      <TableColumn prefWidth="105.5999755859375" text="Granted" />
+                        <TableColumn prefWidth="107.20001220703125" text="With Grant" />
+                    </columns>
+                  </TableView>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+    <bottom>
+        <HBox nodeOrientation="RIGHT_TO_LEFT" spacing="10.0">
+            <children>
+                <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#closeHandler" text="Close">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="applyBtn" mnemonicParsing="false" onAction="#applyHandler" text="Apply">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </Button>
+            </children>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </HBox>
+    </bottom>
+</BorderPane>
