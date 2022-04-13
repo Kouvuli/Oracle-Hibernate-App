@@ -35,10 +35,21 @@ public class UserDetailController {
     @FXML
     private Text createAt;
 
+    @FXML
+    private Text lockDate;
+
+    @FXML
+    private Text expiryDate;
     public void setUser(User user){
         userId.setText(String.valueOf(user.getId()));
         username.setText(user.getUsername());
         createAt.setText(user.getCreated().toString());
+        if (user.getLockDate()!=null){
+            lockDate.setText(user.getLockDate().toString());
+        }
+        if (user.getExpiryDate()!=null){
+            expiryDate.setText(user.getExpiryDate().toString());
+        }
     }
 
 

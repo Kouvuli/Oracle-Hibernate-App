@@ -24,6 +24,7 @@ public class HibernateUtils {
         props.put(Environment.PASS,"19120644@Tam");
         props.put(Environment.USER,"system");
         props.put(Environment.SHOW_SQL,"true");
+
         conf.setProperties(props);
 
 

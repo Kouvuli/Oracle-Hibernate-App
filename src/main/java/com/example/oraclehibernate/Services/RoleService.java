@@ -6,49 +6,65 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserService {
+public class RoleService {
     private Connection connection;
 
-    public UserService(){
+    public RoleService(){
 
     }
-    public void createNewUser(String username,String password) {
+    public void createNewRole(String rolename) {
         JDBCUtils utils=new JDBCUtils();
         connection=utils.getConnection();
         try {
             Statement stmt = connection.createStatement();
             String alterSession = "alter session set \"_ORACLE_SCRIPT\"=true ";
             stmt.execute(alterSession);
-            String query="CREATE USER "+username+" IDENTIFIED BY "+password;
+            String query="CREATE ROLE "+rolename;
             stmt.execute(query);
-            String grantCreateSession="GRANT CREATE SESSION TO "+username;
-            stmt.execute(grantCreateSession);
-
             System.out.println("Create thanh cong");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void dropUser(String username){
+
+    public void dropRole(String rolename){
         JDBCUtils utils=new JDBCUtils();
         connection=utils.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            String query = "DROP USER "+ username + " CASCADE";
+            String query = "DROP ROLE "+ rolename;
             stmt.execute(query);
         }catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void changePassword(String username,String password){
+
+    public void grantRole(String roleName, String grantee, boolean withGrantOption) {
         JDBCUtils utils=new JDBCUtils();
         connection=utils.getConnection();
-        try{
+        String query= "";
+        try {
             Statement stmt = connection.createStatement();
-            String query="ALTER USER"+ username+"IDENTIFIED BY"+  password;
+            if (!withGrantOption) {
+                query="grant "+ roleName + " to " + grantee;
+            } else {
+                query="grant "+ roleName + " to " + grantee + " with grant option";
+            }
             stmt.execute(query);
-        }catch (SQLException e){
+        }catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void revokeRole(String rolename,String grantee){
+        JDBCUtils utils=new JDBCUtils();
+        connection = utils.getConnection();
+        try{
+            Statement stmt = connection.createStatement();
+            String query="revoke "+ rolename+  " from " + grantee;
+            stmt.execute(query);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

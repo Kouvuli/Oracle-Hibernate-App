@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="300.0" prefWidth="398.0" spacing="10.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.oraclehibernate.Controllers.UserDetailController">
+<VBox prefHeight="300.0" prefWidth="398.0" spacing="10.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oraclehibernate.Controllers.UserDetailController">
    <children>
       <HBox spacing="10.0">
          <children>
@@ -23,8 +22,8 @@
                </HBox.margin>
             </Text>
             <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="editBtn" onAction="#editHandler" layoutX="344.0" layoutY="20.0" mnemonicParsing="false" text="Edit" />
-            <Button fx:id="deleteBtn" onAction="#deleteHandler" mnemonicParsing="false" text="Delete">
+            <Button fx:id="editBtn" layoutX="344.0" layoutY="20.0" mnemonicParsing="false" onAction="#editHandler" text="Edit" />
+            <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteHandler" text="Delete">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -58,6 +57,23 @@
             <Insets top="5.0" />
          </VBox.margin>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" />
+      <HBox layoutX="10.0" layoutY="137.0" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lock date" />
+            <Text fx:id="lockDate" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="174.0" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Expire date" />
+            <Text fx:id="expiryDate" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
+      </HBox>
    </children>
 </VBox>
