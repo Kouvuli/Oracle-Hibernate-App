@@ -1,7 +1,6 @@
 package com.example.oraclehibernate.DAO;
 
-import com.example.oraclehibernate.Models.User;
-import com.example.oraclehibernate.Models.UserRole;
+import com.example.oraclehibernate.Entities.User;
 import com.example.oraclehibernate.Utils.HibernateUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -72,7 +71,7 @@ public class UserDAO implements DAOInterface<User> {
         String str=String.format("%%%s%%",username);
 //        Predicate p=cb.like(root.get("grantee").as(String.class),str);
         query.where(cb.like(root.get("username").as(String.class),str));
-        User results= (User) session.createQuery(query).getSingleResult();
+        User results= (User) session.createQuery(query).setMaxResults(1).getSingleResult();
         session.close();
         return results;
     }

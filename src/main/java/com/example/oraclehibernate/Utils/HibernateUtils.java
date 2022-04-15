@@ -1,9 +1,7 @@
 package com.example.oraclehibernate.Utils;
 
 
-import com.example.oraclehibernate.Models.Role;
-import com.example.oraclehibernate.Models.User;
-import com.example.oraclehibernate.Models.UserRole;
+import com.example.oraclehibernate.Entities.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -20,7 +18,7 @@ public class HibernateUtils {
         Properties props=new Properties();
         props.put(Environment.DIALECT,"org.hibernate.dialect.Oracle8iDialect");
         props.put(Environment.DRIVER,"oracle.jdbc.OracleDriver");
-        props.put(Environment.URL,"jdbc:oracle:thin:@localhost:1521/XEPDB1");
+        props.put(Environment.URL,"jdbc:oracle:thin:@localhost:1521/xe");
         props.put(Environment.PASS,"19120644@Tam");
         props.put(Environment.USER,"system");
         props.put(Environment.SHOW_SQL,"true");
@@ -31,6 +29,11 @@ public class HibernateUtils {
         conf.addAnnotatedClass(User.class);
         conf.addAnnotatedClass(Role.class);
         conf.addAnnotatedClass(UserRole.class);
+        conf.addAnnotatedClass(RoleSysPrivs.class);
+        conf.addAnnotatedClass(RoleTabPrivs.class);
+        conf.addAnnotatedClass(UserTabPrivs.class);
+        conf.addAnnotatedClass(UserSysPrivs.class);
+
         ServiceRegistry registry=new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
         FACTORY=conf.buildSessionFactory(registry);

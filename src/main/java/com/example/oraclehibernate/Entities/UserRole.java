@@ -1,4 +1,4 @@
-package com.example.oraclehibernate.Models;
+package com.example.oraclehibernate.Entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,7 +44,7 @@ public class UserRole implements Serializable {
         return grantedRole;
     }
 
-    public boolean isAdminOption() {
+    public boolean getIsAdminOption() {
         return adminOption;
     }
 }

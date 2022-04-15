@@ -1,15 +1,37 @@
 package com.example.oraclehibernate.Services;
 
 import com.example.oraclehibernate.Utils.JDBCUtils;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PrivsService {
     private Connection connection;
     public PrivsService(){}
+
+//    public ObservableList<>getRoleSysPrivs(String roleName){
+//        List<String>sysPrivsList=new ArrayList<>();
+//        JDBCUtils utils=new JDBCUtils();
+//        connection=utils.getConnection();
+//        String query="";
+//        try{
+//            Statement stmt = connection.createStatement();
+//            query= "select * from role_sys_privs where ROLE ="+roleName;
+//            ResultSet rs=stmt.executeQuery(query);
+//            while (rs.next()){
+//                rs.getString
+//            }
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//    }
+
+
     public void grantSelect(List<String>cols,String object, String grantee, boolean withGrantOption){
         JDBCUtils utils=new JDBCUtils();
         connection=utils.getConnection();
@@ -160,5 +182,33 @@ public class PrivsService {
             e.printStackTrace();
         }
     }
+    public void grantSysPrivilege(String priv,String grantee,boolean withAdmin){
+        JDBCUtils utils=new JDBCUtils();
+        connection=utils.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            String query="";
+            if (withAdmin){
+                query="grant " + priv + " to "+ grantee + " with admin option";
+            }
+            else{
+                query="grant " + priv + " to "+ grantee;
+            }
+            stmt.execute(query);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void revokeSysPrivilege(String priv,String grantee){
+        JDBCUtils utils=new JDBCUtils();
+        connection=utils.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            String query="revoke " + priv + " from " + grantee;
 
+            stmt.execute(query);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

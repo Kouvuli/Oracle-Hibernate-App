@@ -39,16 +39,16 @@ public class RoleService {
         }
     }
 
-    public void grantRole(String roleName, String grantee, boolean withGrantOption) {
+    public void grantRole(String roleName, String grantee, boolean withAdminOption) {
         JDBCUtils utils=new JDBCUtils();
         connection=utils.getConnection();
         String query= "";
         try {
             Statement stmt = connection.createStatement();
-            if (!withGrantOption) {
+            if (!withAdminOption) {
                 query="grant "+ roleName + " to " + grantee;
             } else {
-                query="grant "+ roleName + " to " + grantee + " with grant option";
+                query="grant "+ roleName + " to " + grantee + " with admin option";
             }
             stmt.execute(query);
         }catch (SQLException e) {

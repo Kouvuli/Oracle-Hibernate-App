@@ -1,10 +1,9 @@
-package com.example.oraclehibernate.Models;
+package com.example.oraclehibernate.Entities;
 
 
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 @Entity

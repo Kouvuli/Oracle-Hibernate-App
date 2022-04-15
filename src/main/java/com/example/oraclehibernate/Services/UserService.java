@@ -45,7 +45,7 @@ public class UserService {
         connection=utils.getConnection();
         try{
             Statement stmt = connection.createStatement();
-            String query="ALTER USER"+ username+"IDENTIFIED BY"+  password;
+            String query="ALTER USER "+ username+" IDENTIFIED BY "+  password;
             stmt.execute(query);
         }catch (SQLException e){
             e.printStackTrace();

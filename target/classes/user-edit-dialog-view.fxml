@@ -11,10 +11,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oraclehibernate.Controllers.EditDialogController">
+<BorderPane prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oraclehibernate.Controllers.UserEditDialogController">
    <center>
-      <TabPane tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="User">
                <content>
@@ -27,7 +28,7 @@
                                     <Insets top="2.0" />
                                  </padding>
                               </Label>
-                              <TextField>
+                              <TextField fx:id="password">
                                  <HBox.margin>
                                     <Insets left="46.0" />
                                  </HBox.margin>
@@ -47,36 +48,46 @@
                                     <Insets top="2.0" />
                                  </padding>
                               </Label>
-                              <TextField />
+                              <TextField fx:id="confirmPassword" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="7.0" top="10.0" />
                            </padding>
                         </HBox>
+                        <Text fx:id="alertText" strokeType="OUTSIDE" strokeWidth="0.0">
+                           <VBox.margin>
+                              <Insets left="7.0" top="10.0" />
+                           </VBox.margin>
+                        </Text>
                      </children>
+                     <padding>
+                        <Insets left="20.0" top="20.0" />
+                     </padding>
                   </VBox>
                </content></Tab>
-          <Tab text="Granted Roles">
+          <Tab onSelectionChanged="#roleTabHandler" text="Granted Roles">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="roleTable" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="391.999945068359" text="Role" />
-                      <TableColumn prefWidth="108.800048828125" text="Grant" />
+                      <TableColumn fx:id="roleName" prefWidth="277.59998168945276" text="Role" />
+                      <TableColumn fx:id="grantRole" prefWidth="108.0" text="Grant" />
+                        <TableColumn fx:id="withAdminRole" prefWidth="114.4000244140625" text="With Admin" />
                     </columns>
                   </TableView>
                </content>
             </Tab>
-            <Tab text="System Privileges">
+            <Tab onSelectionChanged="#sysPrivsHandler" text="System Privileges">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="sysPrivsTable" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="379.19995727539026" text="Privileges" />
-                      <TableColumn minWidth="0.0" prefWidth="121.60003662109375" text="Grant" />
+                      <TableColumn fx:id="sysPrivsName" prefWidth="303.19995727539026" text="Privileges" />
+                      <TableColumn fx:id="grantSysPrivs" minWidth="0.0" prefWidth="100.0" text="Grant" />
+                        <TableColumn fx:id="withAdminSysPrivs" minWidth="0.0" prefWidth="99.20001220703125" text="With Admin" />
                     </columns>
                   </TableView>
                </content>
             </Tab>
-            <Tab text="Object Privileges">
+            <Tab onSelectionChanged="#tabPrivsHanlder" text="Object Privileges">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
