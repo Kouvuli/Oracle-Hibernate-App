@@ -1,6 +1,9 @@
 package com.example.oraclehibernate.Controllers;
 
 import com.example.oraclehibernate.Entities.Role;
+import com.example.oraclehibernate.Services.RoleService;
+import com.example.oraclehibernate.Services.UserService;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class RoleDetailController {
     @FXML
@@ -19,8 +23,9 @@ public class RoleDetailController {
 
     @FXML
     private Text roleName;
-
-    public void setRole(Role role){
+    private ObservableList<String>roleList;
+    public void setValue(Role role, ObservableList<String> roleList){
+        this.roleList=roleList;
         roleId.setText(String.valueOf(role.getId()));
         roleName.setText(role.getRole());
     }
@@ -29,9 +34,11 @@ public class RoleDetailController {
 
         window.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loader=new FXMLLoader(getClass().getResource("/role-edit-dialog-view.fxml"));
-        Parent root=loader.load();
-        RoleEditDialogController controller=loader.getController();
+        RoleEditDialogController controller=new RoleEditDialogController();
         controller.setRoleName(roleName.getText());
+        loader.setController(controller);
+        Parent root=loader.load();
+//        RoleEditDialogController controller=loader.getController();
 //        window.setUserData(username.getText());
 
         Scene editScene = new Scene(root, 500, 350);
@@ -41,5 +48,10 @@ public class RoleDetailController {
     }
 
     public void deleteHandler(ActionEvent event) {
+        RoleService roleService=new RoleService();
+        roleService.dropRole(roleName.getText());
+        roleList.remove(roleName.getText());
+        MainController mainController=new MainController();
+        mainController.setNotifyText("Remove successfully");
     }
 }

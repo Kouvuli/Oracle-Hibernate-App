@@ -21,7 +21,6 @@ public class RoleService {
             stmt.execute(alterSession);
             String query="CREATE ROLE "+rolename;
             stmt.execute(query);
-            System.out.println("Create thanh cong");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -32,6 +31,8 @@ public class RoleService {
         connection=utils.getConnection();
         try {
             Statement stmt = connection.createStatement();
+            String alterSession = "alter session set \"_ORACLE_SCRIPT\"=true ";
+            stmt.execute(alterSession);
             String query = "DROP ROLE "+ rolename;
             stmt.execute(query);
         }catch (SQLException e) {

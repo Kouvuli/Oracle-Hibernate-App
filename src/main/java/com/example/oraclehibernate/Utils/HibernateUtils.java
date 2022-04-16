@@ -33,6 +33,9 @@ public class HibernateUtils {
         conf.addAnnotatedClass(RoleTabPrivs.class);
         conf.addAnnotatedClass(UserTabPrivs.class);
         conf.addAnnotatedClass(UserSysPrivs.class);
+        conf.addAnnotatedClass(DBTable.class);
+        conf.addAnnotatedClass(TableColumns.class);
+        conf.addAnnotatedClass(ColumnPermission.class);
 
         ServiceRegistry registry=new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();

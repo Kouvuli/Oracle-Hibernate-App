@@ -2,54 +2,71 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oraclehibernate.Controllers.RoleEditDialogController">
+<BorderPane prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab onSelectionChanged="#sysPrivsHandler" text="System Privileges">
+                <Tab text="System Privileges">
                     <content>
                         <TableView fx:id="sysPrivTable" prefHeight="200.0" prefWidth="200.0">
                             <columns>
                                 <TableColumn fx:id="sysPrivsName" prefWidth="296.00000610351526" text="Privileges" />
-                                <TableColumn fx:id="grantSysPriv" minWidth="0.0" prefWidth="96.79998779296875" text="Grant" />
-                        <TableColumn fx:id="withAdminSysPriv" minWidth="0.0" prefWidth="107.20001220703125" text="With Admin" />
+                                <TableColumn fx:id="grantSysPriv" minWidth="0.0" prefWidth="96.79998779296875" style="-fx-alignment: CENTER;" text="Grant" />
+                                <TableColumn fx:id="withAdminSysPriv" minWidth="0.0" prefWidth="107.20001220703125" style="-fx-alignment: CENTER;" text="With Admin" />
                             </columns>
                         </TableView>
                     </content>
                 </Tab>
                 <Tab onSelectionChanged="#tabPrivsHandler" text="Object Privileges">
                     <content>
-                        <TableView prefHeight="200.0" prefWidth="200.0">
-                            <columns>
-                                <TableColumn prefWidth="287.2000183105465" text="Privileges" />
-                                <TableColumn prefWidth="105.5999755859375" text="Granted" />
-                                <TableColumn prefWidth="107.20001220703125" text="With Grant" />
-                            </columns>
-                        </TableView>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <HBox>
+                                    <children>
+                                        <ComboBox fx:id="tableComboBox" onAction="#comboBoxChange" prefWidth="150.0" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="columnPermission" mnemonicParsing="false" onAction="#columnPermissionHandler" text="Column Permission" />
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                </HBox>
+                                <TableView fx:id="tabPrivsTable">
+                                    <columns>
+                                        <TableColumn fx:id="tabPrivsName" prefWidth="367.9999450445175" text="Privilege" />
+                                        <TableColumn fx:id="grantTabPrivs" prefWidth="132.00006103515625" style="-fx-alignment: CENTER;" text="Grant" />
+
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
                     </content>
                 </Tab>
             </tabs>
         </TabPane>
     </center>
     <bottom>
-        <HBox nodeOrientation="RIGHT_TO_LEFT" spacing="10.0">
+        <HBox nodeOrientation="RIGHT_TO_LEFT" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
             <children>
-                <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#closeHandler" text="Close">
+                <Button mnemonicParsing="false" onAction="#closeHandler" text="Close">
                     <HBox.margin>
                         <Insets />
                     </HBox.margin>
                 </Button>
-                <Button fx:id="applyBtn" mnemonicParsing="false" onAction="#applyHandler" text="Apply">
+                <Button mnemonicParsing="false" onAction="#applyHandler" text="Apply">
                     <HBox.margin>
                         <Insets />
                     </HBox.margin>

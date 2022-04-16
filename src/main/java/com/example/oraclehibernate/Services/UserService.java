@@ -34,6 +34,8 @@ public class UserService {
         connection=utils.getConnection();
         try {
             Statement stmt = connection.createStatement();
+            String alterSession = "alter session set \"_ORACLE_SCRIPT\"=true ";
+            stmt.execute(alterSession);
             String query = "DROP USER "+ username + " CASCADE";
             stmt.execute(query);
         }catch (SQLException e) {

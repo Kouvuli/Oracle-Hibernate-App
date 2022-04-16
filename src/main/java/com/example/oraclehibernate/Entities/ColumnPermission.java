@@ -7,77 +7,52 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "DBA_TAB_PRIVS")
-public class UserTabPrivs implements Serializable {
+@Table(name = "USER_COL_PRIVS_MADE")
+public class ColumnPermission implements Serializable {
     @Id
     @Column(name = "GRANTEE")
     private String grantee;
 
-    @Column(name = "OWNER")
-    private String owner;
-
     @Column(name = "TABLE_NAME")
     private String tableName;
 
-    @Column(name = "GRANTOR")
-    private String grantor;
+    @Column(name = "COLUMN_NAME")
+    private String columnName;
 
-    @Id
     @Column(name = "PRIVILEGE")
     private String privilege;
 
-    @Column(name = "GRANTABLE")
-    private boolean grantable;
-
-    public UserTabPrivs(){
-
-    }
+    public ColumnPermission(){}
 
     public void setGrantee(String grantee) {
         this.grantee = grantee;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
     }
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
 
-    public void setGrantor(String grantor) {
-        this.grantor = grantor;
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
     }
 
     public void setPrivilege(String privilege) {
         this.privilege = privilege;
     }
 
-    public void setGrantable(boolean grantable) {
-        this.grantable = grantable;
-    }
-
     public String getGrantee() {
         return grantee;
-    }
-
-    public String getOwner() {
-        return owner;
     }
 
     public String getTableName() {
         return tableName;
     }
 
-    public String getGrantor() {
-        return grantor;
+    public String getColumnName() {
+        return columnName;
     }
 
     public String getPrivilege() {
         return privilege;
-    }
-
-    public boolean getGrantable() {
-        return grantable;
     }
 }

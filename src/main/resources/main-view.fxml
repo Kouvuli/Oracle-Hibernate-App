@@ -45,11 +45,6 @@
             <HBox spacing="10.0">
                <children>
                   <TextField prefWidth="190.0" />
-                   <Button mnemonicParsing="false">
-                       <HBox.margin>
-                           <Insets />
-                       </HBox.margin>
-                   </Button>
                   <Region HBox.hgrow="ALWAYS" />
                   <Button mnemonicParsing="false" text="Log out">
                      <HBox.margin>
@@ -70,7 +65,7 @@
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <Text fx:id="notifyText" strokeType="OUTSIDE" strokeWidth="0.0">
                <HBox.margin>
                   <Insets bottom="5.0" left="8.0" top="5.0" />
                </HBox.margin>
@@ -89,7 +84,7 @@
                            <children>
                               <ButtonBar>
                                 <buttons>
-                                    <Button onAction="#addHandler" maxWidth="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="17.0" text="Add" textAlignment="CENTER">
+                                    <Button maxWidth="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#userAddHandler" prefHeight="17.0" text="Add" textAlignment="CENTER">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -117,7 +112,7 @@
                            <children>
                               <ButtonBar>
                                  <buttons>
-                                    <Button maxWidth="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="17.0" text="Add" textAlignment="CENTER">
+                                    <Button maxWidth="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#roleAddHandler" prefHeight="17.0" text="Add" textAlignment="CENTER">
                                        <font>
                                           <Font size="10.0" />
                                        </font>

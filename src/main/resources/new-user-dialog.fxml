@@ -10,8 +10,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.oraclehibernate.Controllers.NewUserController">
+<BorderPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox>
          <children>

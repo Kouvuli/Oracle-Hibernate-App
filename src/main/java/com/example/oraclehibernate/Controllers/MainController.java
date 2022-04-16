@@ -16,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -31,6 +33,10 @@ public class MainController implements Initializable {
     private ListView roleList;
 
     @FXML
+    private static Text notifyText=new Text();
+
+
+    @FXML
     private ScrollPane content;
 
     private ObservableList<String> usernameList;
@@ -39,33 +45,38 @@ public class MainController implements Initializable {
 
     public MainController() {}
 
+    public void setNotifyText(String s){
+        notifyText.setText(s);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        UserDAO userDAO=new UserDAO();
-        RoleDAO roleDAO=new RoleDAO();
+
+        UserDAO userDAO = new UserDAO();
+        RoleDAO roleDAO = new RoleDAO();
 
 
-        usernameList=userDAO.getAllUsername();
+        usernameList = userDAO.getAllUsername();
         userList.setItems(usernameList);
 
 
         userList.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                String username=(String) userList.getSelectionModel().getSelectedItem();
-                UserRoleDAO userRoleDAO=new UserRoleDAO();
+                String username = (String) userList.getSelectionModel().getSelectedItem();
+                UserRoleDAO userRoleDAO = new UserRoleDAO();
 //                userRoleDAO.getAll();
-                User currUser=userDAO.getUser(username);
+                User currUser = userDAO.getUser(username);
 
-                FXMLLoader loader=new FXMLLoader(getClass().getResource("/user-detail-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/user-detail-view.fxml"));
                 Parent root = null;
                 try {
                     root = (Parent) loader.load();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                UserDetailController controller=loader.getController();
-                controller.setUser(currUser);
+                UserDetailController controller = loader.getController();
+                controller.setValue(currUser, usernameList);
 
                 content.setContent(root);
 
@@ -79,25 +90,25 @@ public class MainController implements Initializable {
 //        rList.forEach(role -> {
 //            roleList.getItems().add(role.getRole());
 //        });
-        roleNameList=roleDAO.getAllRole();
+        roleNameList = roleDAO.getAllRole();
         roleList.setItems(roleNameList);
         roleList.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                String roleName=(String) roleList.getSelectionModel().getSelectedItem();
-                UserRoleDAO userRoleDAO=new UserRoleDAO();
+                String roleName = (String) roleList.getSelectionModel().getSelectedItem();
+                UserRoleDAO userRoleDAO = new UserRoleDAO();
 //                userRoleDAO.getAll();
-                Role curRole=roleDAO.getRole(roleName);
+                Role curRole = roleDAO.getRole(roleName);
 
-                FXMLLoader loader=new FXMLLoader(getClass().getResource("/role-detail-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/role-detail-view.fxml"));
                 Parent root = null;
                 try {
                     root = (Parent) loader.load();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                RoleDetailController controller=loader.getController();
-                controller.setRole(curRole);
+                RoleDetailController controller = loader.getController();
+                controller.setValue(curRole,roleNameList);
 
 
                 content.setContent(root);
@@ -112,13 +123,30 @@ public class MainController implements Initializable {
 
     }
 
-    public void addHandler(ActionEvent event) throws IOException {
+    public void roleAddHandler(ActionEvent event)throws  IOException{
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/new-user-dialog.fxml"));
-        Scene editScene = new Scene(loader.load(), 300, 200);
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/new-role-dialog.fxml"));
+        NewRoleController controller=new NewRoleController();
+        controller.setValue(roleNameList);
+        loader.setController(controller);
+        Parent root=loader.load();
+        Scene scene = new Scene(root);
+        window.setTitle("Add Role");
+        window.setScene(scene);
+        window.show();
+    }
+    public void userAddHandler(ActionEvent event) throws IOException {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/new-user-dialog.fxml"));
+        NewUserController controller=new NewUserController();
+        controller.setValue(usernameList);
+        loader.setController(controller);
+        Parent root=loader.load();
+        Scene scene = new Scene(root);
         window.setTitle("Add User");
-        window.setScene(editScene);
+        window.setScene(scene);
         window.show();
     }
 }

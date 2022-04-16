@@ -38,7 +38,7 @@ public class PrivsService {
         String query="";
         try{
             Statement stmt = connection.createStatement();
-            if (cols.size()==0){
+            if (cols==null|| cols.isEmpty()){
                 if (!withGrantOption) {
                     query="grant select on "+ object + " to "+ grantee;
                 } else {
@@ -63,7 +63,7 @@ public class PrivsService {
         String query="";
         try{
             Statement stmt = connection.createStatement();
-            if (cols.size()==0){
+            if (cols==null|| cols.isEmpty()){
                 if (!withGrantOption) {
                     query="grant delete on "+ object + " to "+ grantee;
                 } else {
@@ -88,7 +88,7 @@ public class PrivsService {
         String query="";
         try{
             Statement stmt = connection.createStatement();
-            if (cols.size()==0){
+            if (cols==null|| cols.isEmpty()){
                 if (!withGrantOption) {
                     query="grant update on "+ object + " to "+ grantee;
                 } else {
@@ -113,7 +113,7 @@ public class PrivsService {
         String query="";
         try{
             Statement stmt = connection.createStatement();
-            if (cols.size()==0){
+            if (cols==null|| cols.isEmpty()){
                 if (!withGrantOption) {
                     query="grant insert on "+ object + " to "+ grantee;
                 } else {
